@@ -3,8 +3,9 @@ from pytube import YouTube
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from moviepy.audio.io.AudioFileClip import AudioFileClip
 from os import path, sep, getlogin, remove
-# pytube3 usually getting download issues, so in this case, we can go for pytubeX instead.
-# 'pip uninstall pytube3' and 'pip install pytubeX'
+# pytube3 is usually getting download issues, so we can go for pytubeX instead.
+# 'pip uninstall pytube3' --> 'pip install pytubeX'
+
 
 class ytToPC(tk.Frame):
     #Master init & general properties:
@@ -102,3 +103,4 @@ ytLink = tk.StringVar()
 
 app = ytToPC(master=root)
 app.mainloop()
+

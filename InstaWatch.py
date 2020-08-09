@@ -5,6 +5,7 @@ from os import name, system, getlogin
 from time import sleep
 
 # May be useful -> https://medium.com/better-programming/lets-create-an-instagram-bot-to-show-you-the-power-of-selenium-349d7a6744f7
+# know issue -> after showing the following/followers dialog, we're getting only single scroll on the list.
 
 if name == 'nt':
     system('cls')
@@ -91,7 +92,7 @@ class instaWatch():
                 if j == len(followingList):
                     notFollowingBack.append(followingList[i])
                     i+=1
-                    j = 0
+                    j=0
 
         for k in range(0, len(notFollowingBack)):
             print(f'{k}- {notFollowingBack[k]}\n')
