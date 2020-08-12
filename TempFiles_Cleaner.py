@@ -1,4 +1,5 @@
-from os import name, system, listdir, path, getlogin, remove
+from os import name, system, getenv, listdir, remove
+from os.path import isfile, isdir
 from shutil import rmtree
 from time import sleep
 
@@ -11,10 +12,10 @@ def clearDir(pathscr):
     for i in range(0, len(dirFiles)):
         try:
             remove(f"{pathscr}\\{dirFiles[i]}")
-            if path.isfile(f"{pathscr}\\{dirFiles[i]}") == True:
+            if isfile(f"{pathscr}\\{dirFiles[i]}") == True:
                 deleteErr(dirFiles[i], pathscr)
         except:
-            if path.isdir(f"{pathscr}\\{dirFiles[i]}") == True:
+            if isdir(f"{pathscr}\\{dirFiles[i]}") == True:
                 try:
                     rmtree(f"{pathscr}\\{dirFiles[i]}")
                 except:
@@ -23,13 +24,14 @@ def clearDir(pathscr):
 
 if name == 'nt':
     system('cls')
+    localAppData = getenv('LOCALAPPDATA')
 #Temp folder: "C:\Users\{UserName}\AppData\Local\Temp"
-    clearDir(f'C:\\Users\\{getlogin()}\\AppData\\Local\\Temp')
-    print('// "Temp" folder cleaned.')
+    clearDir(f'{localAppData}\\Temp')
+    print('// "%temp%" folder cleaned.')
     sleep(1.5)
 #%temp% folder: "C:\Windows\Temp"
     clearDir('C:\\Windows\\Temp')
-    print('// "%temp%" folder cleaned.')
+    print('// "Temp" folder cleaned.')
     sleep(1.5)
 #Prefetch folder: "C:\Windows\Prefetch"
     clearDir('C:\\Windows\\Prefetch')
