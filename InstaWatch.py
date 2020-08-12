@@ -13,7 +13,7 @@ else:
     system('clear')
 
 
-class instaWatch():
+class InstaWatch():
     def __init__(self, userStr, passStr):
         self.userStr = userStr
         self.passStr = passStr
@@ -46,14 +46,14 @@ class instaWatch():
         followingList = []
 
         for user in getFollowingList.find_elements_by_css_selector("li"):
-            userName = user.find_element_by_css_selector("a").get_attribute("title")
+            username = user.find_element_by_css_selector("a").get_attribute("title")
             sleep(.5)
-            followingList.append(userName)
+            followingList.append(username)
             if len(followingList) == totalFollowing:
                 break
         #print(followingList)
         return followingList
-    
+
 
     def getFollowers(self, totalFollowers):
         statInput = self.driver.find_element_by_xpath(f"//a[@href='/{self.userStr}/followers/']")
@@ -69,9 +69,9 @@ class instaWatch():
         followersList = []
 
         for user in getFollowersList.find_elements_by_css_selector("li"):
-            userName = user.find_element_by_css_selector("a").get_attribute("title")
+            username = user.find_element_by_css_selector("a").get_attribute("title")
             sleep(.5)
-            followersList.append(userName)
+            followersList.append(username)
             if len(followersList) == totalFollowers:
                 break
         #print(followersList)
@@ -98,11 +98,11 @@ class instaWatch():
             print(f'{k}- {notFollowingBack[k]}\n')
         
 
-instaUser = '******'
-instaPass = '******'
+instUser = '******'
+instPass = '******'
 
-InstaWatch = instaWatch(instaUser, instaPass)
-InstaWatch.logMeIn()
-followingList = InstaWatch.getFollowing(999999)
-followersList = InstaWatch.getFollowers(999999)
-InstaWatch.compareLists(followingList, followersList)
+app = InstaWatch(instUser, instPass)
+app.logMeIn()
+followingList = app.getFollowing(999999)
+followersList = app.getFollowers(999999)
+app.compareLists(followingList, followersList)
