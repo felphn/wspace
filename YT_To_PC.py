@@ -2,7 +2,8 @@ import tkinter as tk
 from pytube import YouTube
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from moviepy.audio.io.AudioFileClip import AudioFileClip
-from os import path, sep, getlogin, remove
+from os import getlogin, remove, sep
+from os.path import abspath
 # pytube3 is usually getting download issues, so we can go for pytubeX instead.
 # 'pip uninstall pytube3' --> 'pip install pytubeX'
 
@@ -41,7 +42,7 @@ class ytToPC(tk.Frame):
         try:
             currStatus.set('[1/2] Downloading...') #sets a new status for the app.
             root.update() #updates the app.
-            downPath = f'{path.abspath(sep)}Users\\{getlogin()}\\Downloads' #sets the download dir path.
+            downPath = f'{abspath(sep)}Users\\{getlogin()}\\Downloads' #sets the download dir path.
             ytVid = YouTube(ytLink.get()) #gets from the user the yt video link.
             ytVid.streams.filter(adaptive=True, type='video').first().download(downPath, filename='tempVidFile') #"adaptative" gets the best video or audio quality possible.
             ytVid.streams.filter(adaptive=True, type='audio').first().download(downPath, filename='tempAudFile') #"first" gets the first video listed inside the array defined by adaptative param.
@@ -70,7 +71,7 @@ class ytToPC(tk.Frame):
         try:
             currStatus.set('[1/2] Downloading...')
             root.update()
-            downPath = f'{path.abspath(sep)}Users\\{getlogin()}\\Downloads'
+            downPath = f'{abspath(sep)}Users\\{getlogin()}\\Downloads'
             ytVid = YouTube(ytLink.get())
             ytVid.streams.first().download(downPath, filename='tempAudFile')
             tempAudFile = VideoFileClip(f'{downPath}\\tempAudFile.mp4')
@@ -103,4 +104,3 @@ ytLink = tk.StringVar()
 
 app = ytToPC(master=root)
 app.mainloop()
-

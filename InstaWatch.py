@@ -2,7 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from itertools import count
 from explicit.waiter import find_element
-from os import getlogin, name, system
+from os import name, system, getlogin, sep
+from os.path import abspath
 from time import sleep
 
 
@@ -39,11 +40,11 @@ def getFollowr(driver, instUser):
     findField.click()
     print('> Catching usernames in "Followers" list ...\n')
     sleep(2.5)
-    getFollowersCSS = 'ul div li:nth-child({}) a.notranslate'
+    getFollowerCSS = 'ul div li:nth-child({}) a.notranslate'
     for listedUsers in count(start=1, step=12):
         for usrIndex in range(listedUsers, listedUsers+12):
-            yield find_element(driver, getFollowersCSS.format(usrIndex)).text
-        lastUserListed = find_element(driver, getFollowersCSS.format(usrIndex))
+            yield find_element(driver, getFollowerCSS.format(usrIndex)).text
+        lastUserListed = find_element(driver, getFollowerCSS.format(usrIndex))
         driver.execute_script("arguments[0].scrollIntoView()", lastUserListed)
 
 
@@ -54,14 +55,14 @@ def watchLists(driver, instUser, totalFollowing, totalFollowers):
     try:
         sleep(5.0)
         for i, usr in enumerate(getFollowg(driver, instUser), 1):
-            #print(f'{i}- {usr}')
+            #print(f'({i})- {usr}')
             followingList.append(usr)
             if i >= totalFollowing:
                 break
         
         sleep(45.0)
         for i, usr in enumerate(getFollowr(driver, instUser), 1):
-            #print(f'{i}- {usr}')
+            #print(f'({i})- {usr}')
             followersList.append(usr)
             if i >= totalFollowers:
                 break
@@ -77,7 +78,7 @@ def watchLists(driver, instUser, totalFollowing, totalFollowers):
         system('cls')
         print('-'*34, '\n> Not following you back:\n')
         for k in range(0, len(notFollowingBack)):
-            print(f'[{k+1}]- {notFollowingBack[k]}')
+            print(f'({k+1})- {notFollowingBack[k]}')
 
     finally:
         driver.quit()
@@ -94,10 +95,10 @@ if name == 'nt':
     sleep(2.5)
     print('-'*34, '\n> Done!\n> Starting browser ...')
     print('-'*34)
-    driver = webdriver.Edge(executable_path=f"C:\\Users\\{getlogin()}\\Documents\\msedgedriver.exe")
+    driver = webdriver.Edge(executable_path=f"{abspath(sep)}Users\\{getlogin()}\\Documents\\msedgedriver.exe")
     logMeIn(driver, instUser, instPass)
     watchLists(driver, instUser, totalFollowing, totalFollowers)
     system('pause')
-
 else:
-    raise RuntimeError
+    print('> Not an Windows OS!')
+    system('pause')

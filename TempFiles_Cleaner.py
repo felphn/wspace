@@ -44,4 +44,4 @@ if name == 'nt':
     sleep(1.5)
 else:
     print('!>> Not an Windows OS!\n')
-    system('clear')
+    system('pause')
