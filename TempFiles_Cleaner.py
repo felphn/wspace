@@ -3,6 +3,7 @@ from os.path import isfile, isdir
 from shutil import rmtree
 from time import sleep
 
+
 def deleteErr(elmnt1, elmnt2):
     print(f'!>> Couldnt delete "{elmnt1}" in "{elmnt2}"')
 
