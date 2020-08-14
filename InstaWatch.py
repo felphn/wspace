@@ -24,7 +24,7 @@ def logMeIn(driver, instUser, instPass):
 def getFollowg(driver, instUser):
     findField = driver.find_element_by_xpath(f"//a[@href='/{instUser}/following/']")
     findField.click()
-    print('> Catching usernames in "Following" list ...\n')
+    print('> Catching usernames in "Following" list ...')
     sleep(2.5)
     getFollowingCSS = 'ul div li:nth-child({}) a.notranslate'
     for listedUsers in count(start=1, step=12):
@@ -38,7 +38,7 @@ def getFollowr(driver, instUser):
     driver.get(f'https://www.instagram.com/{instUser}')
     findField = driver.find_element_by_xpath(f"//a[@href='/{instUser}/followers/']")
     findField.click()
-    print('> Catching usernames in "Followers" list ...\n')
+    print('> Catching usernames in "Followers" list ...')
     sleep(2.5)
     getFollowerCSS = 'ul div li:nth-child({}) a.notranslate'
     for listedUsers in count(start=1, step=12):
@@ -53,22 +53,25 @@ def watchLists(driver, instUser, totalFollowing, totalFollowers):
     followersList = []
     notFollowingBack = []
     try:
-        sleep(5.0)
+        sleep(7.5)
         for i, usr in enumerate(getFollowg(driver, instUser), 1):
             #print(f'({i})- {usr}')
             followingList.append(usr)
             if i >= totalFollowing:
+                print(f'> {i} usernames appended.\n')
                 break
         
-        sleep(45.0)
+        sleep(7.5)
         for i, usr in enumerate(getFollowr(driver, instUser), 1):
             #print(f'({i})- {usr}')
             followersList.append(usr)
             if i >= totalFollowers:
+                print(f'> {i} usernames appended.\n')
                 break
         
-        sleep(45.0)
+        sleep(2.5)
         print('> Iterating over lists ...\n')
+        sleep(5.0)
         for j in range(0, len(followingList)):
             if followingList[j] not in followersList:
                 notFollowingBack.append(followingList[j])
