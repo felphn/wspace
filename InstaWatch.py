@@ -90,7 +90,7 @@ def watchLists(driver, instUser, totalFollowing, totalFollowers):
 if name == 'nt':
     system('cls')
     print('='*8, '<> InstaWatch <>', '='*8)
-    print(' '*7, 'written by felphn')
+    print(' '*7, 'written by felpshn')
     instUser = str(input('\n> Username: '))
     instPass = str(input('> Password: '))
     totalFollowing = int(input('\n> Num of users that you follow: '))

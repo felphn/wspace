@@ -34,7 +34,7 @@ class ytToPC(tk.Frame):
         self.exit = tk.Button(self, text='     Exit     ', fg='red', font=('helvetica', 10, 'bold'), command=self.master.destroy)
         self.exit.pack(pady=5)
         #program info properties:
-        self.info = tk.Label(self, text='made by felphn', fg='grey', font=('helvetica', 9, 'italic'))
+        self.info = tk.Label(self, text='made by felpshn', fg='grey', font=('helvetica', 9, 'italic'))
         self.info.pack(pady=3)
 
 

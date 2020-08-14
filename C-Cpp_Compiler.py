@@ -24,7 +24,7 @@ class GppCompiler(tk.Frame):
         self.run.pack(pady=2)
         self.quit = tk.Button(self, text='     Quit     ', fg='red', font=('helvetica', 10, 'bold'), command=self.master.destroy)
         self.quit.pack(pady=2)
-        self.info = tk.Label(self, text='made by felphn\nMinGW environment', fg='grey')
+        self.info = tk.Label(self, text='made by felpshn\nMinGW environment', fg='grey')
         self.info.pack(pady=2)
     
 
