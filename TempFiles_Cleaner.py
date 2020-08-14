@@ -1,7 +1,15 @@
 from os import name, system, getenv, listdir, remove
 from os.path import isfile, isdir
+import ctypes, sys
 from shutil import rmtree
 from time import sleep
+
+
+def isAdmin():
+    try:
+        return ctypes.windll.shell32.IsUserAnAdmin()
+    except:
+        return False
 
 
 def deleteErr(elmnt1, elmnt2):
@@ -23,25 +31,28 @@ def clearDir(pathscr):
                     deleteErr(dirFiles[i], pathscr)
 
 
-if name == 'nt':
-    system('cls')
-    localAppData = getenv('LOCALAPPDATA')
-#Temp folder: "C:\Users\{UserName}\AppData\Local\Temp"
-    clearDir(f'{localAppData}\\Temp')
-    print('// "%temp%" folder cleaned.')
-    sleep(1.5)
-#%temp% folder: "C:\Windows\Temp"
-    clearDir('C:\\Windows\\Temp')
-    print('// "Temp" folder cleaned.')
-    sleep(1.5)
-#Prefetch folder: "C:\Windows\Prefetch"
-    clearDir('C:\\Windows\\Prefetch')
-    print('// "Prefetch" folder cleaned.')
-    sleep(1.5)
-#WinUpdate folder: "C:\Windows\SoftwareDistribution\Download"
-    clearDir('C:\\Windows\\SoftwareDistribution\\Download')
-    print('// Windows Update folder cleaned.\n')
-    sleep(1.5)
+if isAdmin():
+    if name == 'nt':
+        system('cls')
+        localAppData = getenv('LOCALAPPDATA')
+    #Temp folder: "C:\Users\{UserName}\AppData\Local\Temp"
+        clearDir(f'{localAppData}\\Temp')
+        print('\n// "%temp%" folder cleaned.')
+        sleep(1.5)
+    #%temp% folder: "C:\Windows\Temp"
+        clearDir('C:\\Windows\\Temp')
+        print('// "Temp" folder cleaned.')
+        sleep(1.5)
+    #Prefetch folder: "C:\Windows\Prefetch"
+        clearDir('C:\\Windows\\Prefetch')
+        print('// "Prefetch" folder cleaned.')
+        sleep(1.5)
+    #WinUpdate folder: "C:\Windows\SoftwareDistribution\Download"
+        clearDir('C:\\Windows\\SoftwareDistribution\\Download')
+        print('// Windows Update folder cleaned.\n')
+        sleep(1.5)
+    else:
+        print('!>> Not an Windows OS!\n')
+        system('pause')
 else:
-    print('!>> Not an Windows OS!\n')
-    system('pause')
+    ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
