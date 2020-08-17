@@ -49,26 +49,41 @@ def getFollowr(driver, instUser):
 
 
 def watchLists(driver, instUser, totalFollowing, totalFollowers):
+    k = 0
     followingList = []
     followersList = []
     notFollowingBack = []
     try:
         sleep(7.5)
-        for i, usr in enumerate(getFollowg(driver, instUser), 1):
-            #print(f'({i})- {usr}')
-            followingList.append(usr)
-            if i >= totalFollowing:
-                print(f'> {i} usernames appended.\n')
-                break
-        
+        try:
+            for i, usr in enumerate(getFollowg(driver, instUser), 1):
+                #print(f'({i})- {usr}')
+                k = i
+                followingList.append(usr)
+                if i >= totalFollowing:
+                    break
+        except Exception as e:
+            #print(e)
+            pass
+        print(f'> {k} username(s) appended.')
+        if k < totalFollowing:
+            print(f'> {totalFollowing - k} user(s) not found.\n')
+
         sleep(7.5)
-        for i, usr in enumerate(getFollowr(driver, instUser), 1):
-            #print(f'({i})- {usr}')
-            followersList.append(usr)
-            if i >= totalFollowers:
-                print(f'> {i} usernames appended.\n')
-                break
-        
+        try:
+            for i, usr in enumerate(getFollowr(driver, instUser), 1):
+                #print(f'({i})- {usr}')
+                k = i
+                followersList.append(usr)
+                if i >= totalFollowers:
+                    break
+        except Exception as e:
+            #print(e)
+            pass
+        print(f'> {k} username(s) appended.')
+        if k < totalFollowers:
+            print(f'> {totalFollowers - k} user(s) not found.\n')
+
         sleep(2.5)
         print('> Iterating over lists ...\n')
         sleep(5.0)
@@ -77,11 +92,12 @@ def watchLists(driver, instUser, totalFollowing, totalFollowers):
                 notFollowingBack.append(followingList[j])
             else:
                 pass
-        
+
         system('cls')
         print('-'*34, '\n> Not following you back:\n')
         for k in range(0, len(notFollowingBack)):
             print(f'({k+1})- {notFollowingBack[k]}')
+        print('\n')
 
     finally:
         driver.quit()
