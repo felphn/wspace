@@ -7,7 +7,7 @@ from os.path import abspath
 from time import sleep
 
 
-def logMeIn(driver, instUser, instPass):
+def logIn(driver, instUser, instPass):
     driver.get('https://www.instagram.com/')
     sleep(1.5)
     findField = driver.find_element_by_xpath("//input[@name='username']")
@@ -65,9 +65,10 @@ def watchLists(driver, instUser, totalFollowing, totalFollowers):
         except Exception as e:
             #print(e)
             pass
-        print(f'> {k} username(s) appended.')
         if k < totalFollowing:
-            print(f'> {totalFollowing - k} user(s) not found.\n')
+            print(f'> {totalFollowing-k} user(s) not found.\n> {k} username(s) appended.\n')
+        else:
+            print(f'> {k} username(s) appended.\n')
 
         sleep(7.5)
         try:
@@ -80,9 +81,10 @@ def watchLists(driver, instUser, totalFollowing, totalFollowers):
         except Exception as e:
             #print(e)
             pass
-        print(f'> {k} username(s) appended.')
         if k < totalFollowers:
-            print(f'> {totalFollowers - k} user(s) not found.\n')
+            print(f'> {totalFollowers-k} user(s) not found.\n> {k} username(s) appended.\n')
+        else:
+            print(f'> {k} username(s) appended.\n')
 
         sleep(2.5)
         print('> Iterating over lists ...\n')
@@ -90,8 +92,6 @@ def watchLists(driver, instUser, totalFollowing, totalFollowers):
         for j in range(0, len(followingList)):
             if followingList[j] not in followersList:
                 notFollowingBack.append(followingList[j])
-            else:
-                pass
 
         system('cls')
         print('-'*34, '\n> Not following you back:\n')
@@ -115,7 +115,7 @@ if name == 'nt':
     print('-'*34, '\n> Done!\n> Starting browser ...')
     print('-'*34)
     driver = webdriver.Edge(executable_path=f"{abspath(sep)}Users\\{getlogin()}\\Documents\\msedgedriver.exe")
-    logMeIn(driver, instUser, instPass)
+    logIn(driver, instUser, instPass)
     watchLists(driver, instUser, totalFollowing, totalFollowers)
     system('pause')
 else:
