@@ -7,6 +7,13 @@ from os.path import abspath
 from time import sleep
 
 
+def clearDisplay():
+    if name == 'nt':
+        system('cls')
+    else:
+        system('clear')
+
+
 def logIn(driver, instUser, instPass):
     driver.get('https://www.instagram.com/')
     sleep(1.5)
@@ -17,7 +24,7 @@ def logIn(driver, instUser, instPass):
     findField.send_keys(Keys.RETURN)
     sleep(15.0)
     driver.get(f'https://www.instagram.com/{instUser}')
-    system('cls')
+    clearDisplay()
     print(f'> Watching "{instUser}" profile.\n')
 
 
@@ -93,7 +100,7 @@ def watchLists(driver, instUser, totalFollowing, totalFollowers):
             if followingList[j] not in followersList:
                 notFollowingBack.append(followingList[j])
 
-        system('cls')
+        clearDisplay()
         print('-'*34, '\n> Not following you back:\n')
         for k in range(0, len(notFollowingBack)):
             print(f'({k+1})- {notFollowingBack[k]}')
@@ -103,21 +110,20 @@ def watchLists(driver, instUser, totalFollowing, totalFollowers):
         driver.quit()
 
 
+clearDisplay()
+print('='*8, '<> InstaWatch <>', '='*8)
+print(' '*7, 'written by felpshn')
+instUser = str(input('\n> Username: '))
+instPass = str(input('> Password: '))
+totalFollowing = int(input('\n> Num of users that you follow: '))
+totalFollowers = int(input('> Num of users that follows you: '))
+sleep(2.5)
+print('-'*34, '\n> Done!\n> Starting browser ...')
+print('-'*34)
 if name == 'nt':
-    system('cls')
-    print('='*8, '<> InstaWatch <>', '='*8)
-    print(' '*7, 'written by felpshn')
-    instUser = str(input('\n> Username: '))
-    instPass = str(input('> Password: '))
-    totalFollowing = int(input('\n> Num of users that you follow: '))
-    totalFollowers = int(input('> Num of users that follows you: '))
-    sleep(2.5)
-    print('-'*34, '\n> Done!\n> Starting browser ...')
-    print('-'*34)
-    driver = webdriver.Edge(executable_path=f"{abspath(sep)}Users\\{getlogin()}\\Documents\\msedgedriver.exe")
-    logIn(driver, instUser, instPass)
-    watchLists(driver, instUser, totalFollowing, totalFollowers)
-    system('pause')
+    driver = webdriver.Edge(executable_path=f"{abspath(sep)}Users\\{getlogin()}\\Documents\\msedgedriver")
 else:
-    print('> Not an Windows OS!')
-    system('pause')
+    driver = webdriver.Firefox(executable_path=f"/home/{getlogin()}/Documents/geckodriver")
+logIn(driver, instUser, instPass)
+watchLists(driver, instUser, totalFollowing, totalFollowers)
+system('pause')
