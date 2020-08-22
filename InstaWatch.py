@@ -121,9 +121,15 @@ sleep(2.5)
 print('-'*34, '\n> Done!\n> Starting browser ...')
 print('-'*34)
 if name == 'nt':
-    driver = webdriver.Edge(executable_path=f"{abspath(sep)}Users\\{getlogin()}\\Documents\\msedgedriver")
+    try:
+        driver = webdriver.Edge(executable_path=f"{abspath(sep)}Users\\{getlogin()}\\Documents\\msedgedriver")
+    except:
+        driver = webdriver.Chrome(executable_path=f"{abspath(sep)}Users\\{getlogin()}\\Documents\\chromedriver")
 else:
-    driver = webdriver.Firefox(executable_path=f"/home/{getlogin()}/Documents/geckodriver")
+    try:
+        driver = webdriver.Firefox(executable_path=f"/home/{getlogin()}/Documents/geckodriver")
+    except:
+        driver = webdriver.Chrome(executable_path=f"/home/{getlogin()}/Documents/chromedriver")
 logIn(driver, instUser, instPass)
 watchLists(driver, instUser, totalFollowing, totalFollowers)
 system('pause')
