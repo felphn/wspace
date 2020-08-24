@@ -10,7 +10,7 @@ class JsCompiler(tk.Frame):
         self.master = master
         self.pack()
         self.envProp()
-    
+
 
     def envProp(self):
         self.run = tk.Button(self, text='     Run     ', fg='green', font=('helvetica', 11, 'bold'), command=self.startNode)
@@ -33,18 +33,21 @@ class JsCompiler(tk.Frame):
             except:
                 getNode = '/usr/bin/nodejs'
                 Popen([r'{}'.format(getNode), '{}'.format(jsFile)])
-            system('clear')    
+            system('clear')
 
 
 if name == 'nt':
     system('cls')
+    getFile = str(input('File name?\n> '))
+    jsFile = f'{dirname(realpath(__file__))}\\{getFile}'
+    checkFile = isfile(jsFile)
 else:
     system('clear')
-getFile = str(input('File name?\n> '))
-checkFile = isfile(f'{dirname(realpath(__file__))}\\{getFile}')
+    getFile = str(input('File name?\n> '))
+    jsFile = f'{dirname(realpath(__file__))}/{getFile}'
+    checkFile = isfile(jsFile)
 if checkFile == True:
     print('-'*22, '\nDone! Process started.')
-    jsFile = f'{dirname(realpath(__file__))}\\{getFile}'
     root = tk.Tk()
     root.title('JS Compiler')
     root.geometry('235x105')
@@ -55,3 +58,4 @@ else:
     print('-'*44, "\n!>> Error: Couldn't find the specified file!\n")
     print('Check if the js file is in the same directory as the compiler.\n')
     system('pause')
+
