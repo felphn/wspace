@@ -31,8 +31,8 @@ def clearDir(pathscr):
                     deleteErr(dirFiles[i], pathscr)
 
 
-if isAdmin():
-    if name == 'nt':
+if name == 'nt':
+    if isAdmin():
         system('cls')
         localAppData = getenv('LOCALAPPDATA')
     #Temp folder: "C:\Users\{UserName}\AppData\Local\Temp"
@@ -52,7 +52,7 @@ if isAdmin():
         print('// Windows Update folder cleaned.\n')
         sleep(1.5)
     else:
-        print('!>> Not an Windows OS!\n')
-        system('pause')
+        ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
 else:
-    ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
+    print('!>> Not an Windows OS!\n')
+    sleep(5.0)

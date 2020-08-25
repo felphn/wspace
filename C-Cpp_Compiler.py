@@ -17,7 +17,7 @@ class GppCompiler(tk.Frame):
         super().__init__(master)
         self.pack()
         self.envProps()
-    
+
 
     def envProps(self):
         self.run = tk.Button(self, text='     Run     ', fg='green', font=('helvetica', 11, 'bold'), command=self.startGpp)
@@ -26,7 +26,7 @@ class GppCompiler(tk.Frame):
         self.quit.pack(pady=2)
         self.info = tk.Label(self, text='made by felpshn\nMinGW environment', fg='grey')
         self.info.pack(pady=2)
-    
+
 
     def startGpp(self):
         compFileExists = isfile(f'{dirname(realpath(__file__))}\\a.exe')
@@ -61,4 +61,4 @@ if name == 'nt':
         system('pause')
 else:
     print('!>> Not an Windows OS!')
-    system('pause')
+    sleep(5.0)
