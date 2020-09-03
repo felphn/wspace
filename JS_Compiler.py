@@ -57,5 +57,4 @@ if checkFile == True:
 else:
     print('-'*44, "\n!>> Error: Couldn't find the specified file!\n")
     print('Check if the js file is in the same directory as the compiler.\n')
-    system('pause')
-
+    input('Press any key to continue ...')

@@ -54,5 +54,5 @@ if name == 'nt':
     else:
         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
 else:
-    print('!>> Not an Windows OS!\n')
-    sleep(5.0)
+    print('\n!>> Not a Windows OS!\n')
+    input('Press any key to continue ...')

@@ -60,5 +60,5 @@ if name == 'nt':
         print('Check if the c/cpp file is in the same directory as the compiler.\n')
         system('pause')
 else:
-    print('!>> Not an Windows OS!')
-    sleep(5.0)
+    print('\n!>> Not a Windows OS!')
+    input('Press any key to continue ...')
