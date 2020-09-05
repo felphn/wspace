@@ -24,32 +24,8 @@ sudo apt install curl -y &&
 
 echo -e "\n${CL}Installing 'vim' ...${NC}\n"
 sudo apt install vim -y &&
-echo -e "\n${CL}Configuring 'vim' ...${NC}\n"
-echo "syntax on" >> ~/.vimrc
-echo "set noerrorbells" >> ~/.vimrc
-echo "set tabstop=4 softtabstop=4" >> ~/.vimrc
-echo "set shiftwidth=4" >> ~/.vimrc
-echo "set expandtab" >> ~/.vimrc
-echo "set smartindent" >> ~/.vimrc
-echo "set nu" >> ~/.vimrc
-echo "set mouse=a" >> ~/.vimrc
-echo "set smartcase" >> ~/.vimrc
-echo "set nobackup" >> ~/.vimrc
-echo "set incsearch" >> ~/.vimrc
-echo "inoremap < <><left>" >> ~/.vimrc
-echo "call plug#begin('~/.vim/plugged')" >> ~/.vimrc
-echo "Plug 'sheerun/vim-polyglot'" >> ~/.vimrc
-echo "Plug 'jiangmiao/auto-pairs'" >> ~/.vimrc
-echo "call plug#end()" >> ~/.vimrc
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-echo -e "\n${CL}Installing 'zsh' ...${NC}\n"
-sudo apt install zsh -y &&
-echo -e "\n${CL}Configuring 'zsh' ...${NC}\n"
-sed -i 's/^ZSH_THEME=.*/ZSH_THEME="'steeef'"/' ~/.zshrc
-echo -e "\n${CL}Cloning 'zsh-autosuggestions' ...${NC}\n"
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 echo -e "\n${CL}Cloning my repos on GitHub ...${NC}\n"
 mkdir GitHub
@@ -67,6 +43,30 @@ git clone https://github.com/felpshn/html-css-basic.git
 
 if [ $usrOpt == 1 ]
 then
+    echo -e "\n${CL}Configuring 'vim' ...${NC}\n"
+    echo "syntax on" >> ~/.vimrc
+    echo "set noerrorbells" >> ~/.vimrc
+    echo "set tabstop=4 softtabstop=4" >> ~/.vimrc
+    echo "set shiftwidth=4" >> ~/.vimrc
+    echo "set expandtab" >> ~/.vimrc
+    echo "set smartindent" >> ~/.vimrc
+    echo "set nu" >> ~/.vimrc
+    echo "set mouse=a" >> ~/.vimrc
+    echo "set smartcase" >> ~/.vimrc
+    echo "set nobackup" >> ~/.vimrc
+    echo "set incsearch" >> ~/.vimrc
+    echo "inoremap < <><left>" >> ~/.vimrc
+    echo "call plug#begin('~/.vim/plugged')" >> ~/.vimrc
+    echo "Plug 'sheerun/vim-polyglot'" >> ~/.vimrc
+    echo "Plug 'jiangmiao/auto-pairs'" >> ~/.vimrc
+    echo "call plug#end()" >> ~/.vimrc
+
+    echo -e "\n${CL}Installing 'zsh' ...${NC}\n"
+    sudo apt install zsh -y &&
+    echo -e "\n${CL}Cloning 'zsh-autosuggestions' ...${NC}\n"
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    echo -e "\n${CL}Configuring 'zsh' ...${NC}\n"
+    sed -i 's/^ZSH_THEME=.*/ZSH_THEME="'steeef'"/' ~/.zshrc
     echo "alias cd..='cd ..'" >> ~/.zshrc
     echo "alias cls='clear'" >> ~/.zshrc
     echo "alias explorer='explorer.exe'" >> ~/.zshrc
@@ -84,39 +84,36 @@ fi
 
 if [ $usrOpt == 2 ]
 then
-    echo "alias cd..='cd ..'" >> ~/.zshrc
-    echo "alias cls='clear'" >> ~/.zshrc
-    echo "export EDITOR=/usr/bin/vim" >> ~/.zshrc
-    echo "export VISUAL=/usr/bin/vim" >> ~/.zshrc
     echo -e "\n${CL}Installing 'pip3' ...${NC}\n"
     sudo apt install python3-pip -y &&
+
     echo -e "\n${CL}Installing 'python-tkinter' ...${NC}\n"
     sudo apt-get install python3-tk -y &&
+
     echo -e "\n${CL}Installing 'nodejs' ...${NC}\n"
     sudo apt install nodejs -y &&
-    echo -e "\n${CL}Installing 'pulseaudio' ...${NC}\n"
+
+    echo -e "\n${CL}Installing 'pulseaudio' and 'pulseeffects' ...${NC}\n"
     sudo apt install pavucontrol -y &&
     sudo apt install pulseeffects -y &&
+
     echo -e "\n${CL}Installing 'vlc' ...${NC}\n"
     sudo snap install vlc &&
+
     echo -e "\n${CL}Installing 'spotify' ...${NC}\n"
     sudo snap install spotify &&
+
     echo -e "\n${CL}Installing 'discord' ...${NC}\n"
     sudo snap install discord &&
+
     echo -e "\n${CL}Installing 'thunderbird' ...${NC}\n"
     sudo snap install thunderbird &&
-    echo -e "\n${CL}Installing 'oh my zsh' ...${NC}\n"
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 sudo apt autoremove -y &&
 sudo apt autoclean &&
 sudo apt-get clean &&
 
-echo -e "\n${CL}-----------------------------------"
-echo -e "// Action manually needed:"
-echo -e "(1)- add 'zsh-autosuggestions' to plugins at ~/.zshrc"
-echo -e "(2)- ':PlugInstall' to complete vim plugins installation"
 echo -e "\n\n==================================="
 echo -e "              ${NC}All done!              "
 echo -e "${CL}===================================${NC}\n"
